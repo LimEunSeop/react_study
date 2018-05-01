@@ -13,18 +13,18 @@ module.exports = {
     },
 
     module: {
-      loaders: [
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          query: {
-            cacheDirectory: true,
-            presets: ['es2015', 'react'],
-            plugins: ['react-hot-loader/babel'] // HMR시 state를 유지하기위해
-          },
-          exclude: /node_modules/
-        }
-      ]
+        loaders: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                query: {
+                    cacheDirectory: true,
+                    presets: ['es2015', 'react'],
+                    plugins: ['react-hot-loader/babel'] // HMR시 state를 유지하기위해
+                },
+                exclude: /node_modules/
+            }
+        ]
     },
 
     // plugins: [
