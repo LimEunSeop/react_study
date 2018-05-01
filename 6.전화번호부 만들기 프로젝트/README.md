@@ -10,6 +10,9 @@
 
 
 ```javascript
+/*
+/src/components/App.js
+*/
 import React from 'react';
 import ContactInfo from './ContactInfo';
 
