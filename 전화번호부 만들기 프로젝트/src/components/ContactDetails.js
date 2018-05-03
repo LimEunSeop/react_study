@@ -18,6 +18,14 @@ export default class ContactDetails extends React.Component {
         this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.contact.name !== nextProps.contact.name) {
+            this.setState({
+                isEdit: false
+            });
+        }
+    }
+
     handleToggle() {
 
         this.setState({
@@ -47,16 +55,11 @@ export default class ContactDetails extends React.Component {
 
     handleKeyPress(e) {
         if (e.charCode === 13) {
-            this.handleEdit();
+            this.handleToggle();
         }
     }
 
     render() {
-        // 다른 item이 선택됐다면, Edit모드에서 탈출
-        if (this.props.contact.name != this.state.formerName) {
-            this.state.formerName = this.props.contact.name;
-            this.state.isEdit = false;
-        }
 
         const details = (
             <div>
