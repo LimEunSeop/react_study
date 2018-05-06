@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class DetailOfContact extends React.Component {
+const propTypes = {
+    contact: PropTypes.object,
+    onUpdate: PropTypes.func,
+    onDelete: PropTypes.func
+};
+
+const defaultProps = {
+    contact: {
+        name: null,
+        phone: null
+    },
+    onUpdate: () => console.warn('onUpdate() is not defined'),
+    onDelete: () => console.warn('onDelete() is not defined')
+};
+
+class DetailOfContact extends Component {
 
     constructor(props) {
         super(props);
@@ -38,7 +53,7 @@ export default class DetailOfContact extends React.Component {
                 }
             });
         } else {
-            this.props.onEdit(this.state.editContact);
+            this.props.onUpdate(this.state.editContact);
         }
 
         this.setState({
@@ -105,24 +120,14 @@ export default class DetailOfContact extends React.Component {
                     <button onClick={this.onToggleEdit}>
                         { this.state.isEdit ? 'Save' : 'Edit' }
                     </button>
-                    <button onClick={this.props.onRemove}>Remove</button>
+                    <button onClick={this.props.onDelete}>Delete</button>
                 </p>
             </div>
         );
     }
 }
 
-DetailOfContact.propTypes = {
-    contact: PropTypes.object,
-    onEdit: PropTypes.func,
-    onRemove: PropTypes.func
-};
+DetailOfContact.propTypes = propTypes;
+DetailOfContact.defaultProps = defaultProps;
 
-DetailOfContact.defaultProps = {
-    contact: {
-        name: null,
-        phone: null
-    },
-    onEdit: () => console.err('onEdit() is not defined'),
-    onRemove: () => console.err('onRemove() is not defined')
-};
+export default DetailOfContact;

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import NameOfContact from './NameOfContact';
 import DetailOfContact from './DetailOfContact';
 import CreateContact from './CreateContact';
 
 import update from 'react-addons-update';
 
-export default class ContactsManager extends React.Component {
+class ContactsManager extends Component {
 
     constructor(props) {
         super(props);
@@ -23,9 +24,9 @@ export default class ContactsManager extends React.Component {
 
         this.onKeywordChanged = this.onKeywordChanged.bind(this);
         this.onItemClicked = this.onItemClicked.bind(this);
-        this.onEditCompleted = this.onEditCompleted.bind(this);
-        this.onRemove = this.onRemove.bind(this);
-        this.onCreateItem = this.onCreateItem.bind(this);
+        this.onCreate = this.onCreate.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
+        this.onDelete = this.onDelete.bind(this);
     }
 
     componentWillMount() {
@@ -58,7 +59,18 @@ export default class ContactsManager extends React.Component {
         console.log(idx, 'is clicked');
     }
 
-    onEditCompleted(contact) {
+    onCreate(contact) {
+        this.setState({
+            contacts: update(
+                this.state.contacts,
+                {
+                    $push: [contact]
+                }
+            )
+        });
+    }
+
+    onUpdate(contact) {
         this.setState({
             contacts: update(
                 this.state.contacts,
@@ -76,7 +88,7 @@ export default class ContactsManager extends React.Component {
         });
     }
 
-    onRemove() {
+    onDelete() {
         if (this.state.selectedKey == -1) {
             return ;
         }
@@ -88,17 +100,6 @@ export default class ContactsManager extends React.Component {
                 }
             ),
             selectedKey: -1
-        });
-    }
-
-    onCreateItem(contact) {
-        this.setState({
-            contacts: update(
-                this.state.contacts,
-                {
-                    $push: [contact]
-                }
-            )
         });
     }
 
@@ -136,15 +137,17 @@ export default class ContactsManager extends React.Component {
 
                 <DetailOfContact
                     contact={this.state.contacts[this.state.selectedKey]}
-                    onEdit={this.onEditCompleted}
-                    onRemove={this.onRemove}
+                    onUpdate={this.onUpdate}
+                    onDelete={this.onDelete}
                 />
 
                 <CreateContact
-                    onCreate={this.onCreateItem}
+                    onCreate={this.onCreate}
                 />
 
             </div>
         );
     }
 }
+
+export default ContactsManager;

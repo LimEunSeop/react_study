@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class CreateContact extends React.Component {
+const propTypes = {
+    onCreate: PropTypes.func
+};
+
+const defaultProps = {
+    onCreate: () => console.warn('onCreate() is not definded.')
+};
+
+class CreateContact extends Component {
     constructor(props) {
         super(props);
 
@@ -70,10 +78,7 @@ export default class CreateContact extends React.Component {
     }
 }
 
-CreateContact.proptypes = {
-    onCreate: PropTypes.func
-};
+CreateContact.propTypes = propTypes;
+CreateContact.defaultProps = defaultProps;
 
-CreateContact.defaultProps = {
-    onCreate: () => console.err('onCreate() is not definded.')
-};
+export default CreateContact;
