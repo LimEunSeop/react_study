@@ -48,17 +48,17 @@ const mapStateToProps = (state) => {
     return {
         number: state.counter.number,
         color: state.ui.color
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     // return bindActionCreators(actions, dispatch);
     return {
-        handleIncrement: () => { dispatch(actions.increment()) },
-        handleDecrement: () => { dispatch(actions.decrement()) },
-        handleSetColor: (color) => { dispatch(actions.setColor(color)) }
+        handleIncrement: () => { dispatch(actions.increment()); },
+        handleDecrement: () => { dispatch(actions.decrement()); },
+        handleSetColor: (color) => { dispatch(actions.setColor(color)); }
     };
 
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
