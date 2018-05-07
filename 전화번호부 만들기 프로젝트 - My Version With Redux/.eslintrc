@@ -1,0 +1,12 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true # 스프레드 연산자 이것때문에 해결된건가??
+        }
+    },
+    "rules": {},
+    "env": {}
+}
